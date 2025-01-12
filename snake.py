@@ -1,6 +1,7 @@
+from asyncio.sslproto import add_flowcontrol_defaults
 from turtle import Turtle
 START_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
-MOVE_DISTANCE = 20
+MOVE_DISTANCE = 10
 RIGHT = 0
 UP = 90
 LEFT = 180
@@ -17,11 +18,17 @@ class Snake:
         # Create a turtle object with a square shape
         self.snake_body = []
         for position in START_POSITIONS:
-            new_body_segment = Turtle("square")
-            new_body_segment.color("white")
-            new_body_segment.penup()
-            new_body_segment.goto(position)
-            self.snake_body.append(new_body_segment)
+            self.add_body_segment(position)
+
+    def add_body_segment(self, position):
+        new_body_segment = Turtle("square")
+        new_body_segment.color("white")
+        new_body_segment.penup()
+        new_body_segment.goto(position)
+        self.snake_body.append(new_body_segment)
+
+    def extend(self):
+        self.add_body_segment(self.snake_body[-1].position())
 
     # Define a method to move the snake
     def move(self):
