@@ -48,18 +48,18 @@ while game_is_on:
     # Detect snake's heard's collission with food
     if snake.snake_head.distance(food) < 15:
         food.refresh()
-        scoreboard.update_score()
+        scoreboard.increase_score()
         snake.extend()
 
     if snake.snake_head.xcor() > RIGHT_BOUNDARY or snake.snake_head.xcor() < LEFT_BOUNDARY or snake.snake_head.ycor() > TOP_BOUNDARY or snake.snake_head.ycor() < BOTTOM_BOUNDARY:
-        scoreboard.game_over()
-        game_is_on = False
+        scoreboard.reset()
+        snake.reset()
 
     # Detect collision with tail
     for segment in snake.snake_body[1:]:
         if snake.snake_head.distance(segment) < 5:
-            game_is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 # Call the exitonclick() method
 screen.exitonclick()

@@ -16,7 +16,6 @@ class Snake:
 
     def create_snake(self):
         # Create a turtle object with a square shape
-        self.snake_body = []
         for position in START_POSITIONS:
             self.add_body_segment(position)
 
@@ -29,6 +28,13 @@ class Snake:
 
     def extend(self):
         self.add_body_segment(self.snake_body[-1].position())
+
+    def reset(self):
+        for seg in self.snake_body:     # Send the current snake body off the screen ....
+            seg.goto(1000, 1000)    # to this location
+        self.snake_body.clear()
+        self.create_snake()
+        self.snake_head = self.snake_body[0]
 
     # Define a method to move the snake
     def move(self):
