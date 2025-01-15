@@ -54,12 +54,14 @@ while game_is_on:
     if snake.snake_head.xcor() > RIGHT_BOUNDARY or snake.snake_head.xcor() < LEFT_BOUNDARY or snake.snake_head.ycor() > TOP_BOUNDARY or snake.snake_head.ycor() < BOTTOM_BOUNDARY:
         scoreboard.reset()
         snake.reset()
+        scoreboard.save_score_data()
 
     # Detect collision with tail
     for segment in snake.snake_body[1:]:
         if snake.snake_head.distance(segment) < 5:
             scoreboard.reset()
             snake.reset()
+            scoreboard.save_score_data()
 
 # Call the exitonclick() method
 screen.exitonclick()
